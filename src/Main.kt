@@ -1,14 +1,41 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+import kotlin.random.Random
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+fun main() {
+    val options = arrayOf("Камень", "Ножницы", "Бумага")
+
+    while (true) {
+
+        val computerChoice = Random.nextInt(1, 4)
+        println("Компьютер выбрал: ${options[computerChoice - 1]}")
+
+
+        println("Введите ваш выбор (1 - Камень, 2 - Ножницы, 3 - Бумага):")
+        val playerChoice = readlnOrNull()?.toIntOrNull()
+
+
+        if (playerChoice !in 1..3) {
+            println("Ошибка: введите номер от 1 до 3!")
+            continue
+        }
+
+
+        if (playerChoice != null) {
+            println("Вы выбрали: ${options[playerChoice - 1]}")
+        }
+
+
+        when {
+            playerChoice == computerChoice -> {
+                println("Ничья! Игра переигрывается.\n")
+            }
+            (playerChoice == 1 && computerChoice == 2) ||
+                    (playerChoice == 2 && computerChoice == 3) ||
+                    (playerChoice == 1 && computerChoice == 3) -> {
+                println("Вы победили!\n")
+            }
+            else -> {
+                println("Компьютер победил!\n")
+            }
+        }
     }
 }
